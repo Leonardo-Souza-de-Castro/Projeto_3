@@ -19,7 +19,7 @@ Erro Criar(Contatos contatos[], int *pos){
     fgets(contatos[*pos].Email, 70, stdin);
 
     printf("Entre com seu telefone (não coloque caracteres especiais como () ou -): ");
-    fgets(contatos[*pos].Telefone, 11, stdin);
+    fgets(contatos[*pos].Telefone, 12, stdin);
 
     contatos[*pos].Nome[strcspn(contatos[*pos].Nome, "\n")] = 0;
     contatos[*pos].Sobrenome[strcspn(contatos[*pos].Sobrenome, "\n")] = 0;
@@ -93,7 +93,7 @@ Erro Listar(Contatos contatos[], int pos){
 }
 
 Erro Salvar(Contatos contatos[],int total, int pos){
-    FILE *f = fopen("tarefas", "wb");
+    FILE *f = fopen("contatos", "wb");
 
     if(f == NULL){
         return Abrir;
@@ -122,7 +122,7 @@ Erro Salvar(Contatos contatos[],int total, int pos){
 }
 
 Erro Carregar(Contatos contatos[],int total, int *pos){
-    FILE *f = fopen("tarefas", "rb");
+    FILE *f = fopen("contatos", "rb");
 
     if(f == NULL){
         return Abrir;
