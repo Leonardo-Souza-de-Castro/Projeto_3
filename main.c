@@ -3,7 +3,7 @@
 
 int main(){
     int opcao;
-    int pos = 0;
+    int pos;
     Contatos contatos[TOTAL];
 
     Erro e = Carregar(contatos, TOTAL, &pos);

@@ -8,15 +8,26 @@ Erro Criar(Contatos contatos[], int *pos){
     }
     Clear_buffer();
 
-    printf("Entre com seu nome: ");
-    fgets(contatos[*pos].Nome, 70, stdin);
+    // char nome[70];
 
+    do
+    {
+        printf("Entre com seu nome: ");
+        fgets(contatos[*pos].Nome, 70, stdin);
+    } while (strlen(contatos[*pos].Nome) == 1);
 
-    printf("Entre com seu sobrenome: ");
-    fgets(contatos[*pos].Sobrenome, 50, stdin);
+    do
+    {
+        printf("Entre com seu sobrenome: ");
+        fgets(contatos[*pos].Sobrenome, 50, stdin);
+    } while (strlen(contatos[*pos].Sobrenome) == 1);
+    do
 
-    printf("Entre com seu email: ");
-    fgets(contatos[*pos].Email, 70, stdin);
+    {
+        printf("Entre com seu email: ");
+        fgets(contatos[*pos].Email, 70, stdin);
+    } while (strlen(contatos[*pos].Email) == 1);
+    
 
     printf("Entre com seu telefone (não coloque caracteres especiais como () ou -): ");
     fgets(contatos[*pos].Telefone, 12, stdin);
