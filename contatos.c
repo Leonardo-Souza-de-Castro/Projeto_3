@@ -43,7 +43,7 @@ Erro Deletar(Contatos contatos[], int *pos){
     char num_deletar[11];
 
 
-    printf("Entre com o numero do contato (nao utilize () ou - ao digitar): ");
+    printf("Entre com o numero do contato a ser deletado (nao utilize () ou - ao digitar) sera deletado o primeiro resultado com este numero: ");
     fgets(contatos[*pos].Telefone, 11, stdin);
 
     contatos[*pos].Telefone[strcspn(contatos[*pos].Telefone, "\n")] = 0;
@@ -90,6 +90,60 @@ Erro Listar(Contatos contatos[], int pos){
     }
     
     
+}
+
+Erro Salvar(Contatos contatos[],int total, int pos){
+    FILE *f = fopen("tarefas", "wb");
+
+    if(f == NULL){
+        return Abrir;
+    }
+
+    int erro = fwrite(contatos, total, sizeof(Contatos), f);
+
+    if (erro <= 0)
+    {
+        return Escrever;
+    }
+
+    erro = fwrite(&pos, 1, sizeof(int), f);
+
+    if(erro <= 0){
+        return Escrever;
+    }
+
+    erro = fclose(f);
+    if (erro != 0)
+    {
+        return Fechar;
+    }
+
+    return Ok;
+}
+
+Erro Carregar(Contatos contatos[],int total, int *pos){
+    FILE *f = fopen("tarefas", "rb");
+
+    if(f == NULL){
+        return Abrir;
+    }
+
+    int erro = fread(contatos, total, sizeof(Contatos), f);
+    if(erro <= 0){
+        return Ler;
+    }
+
+    erro = fread(pos, 1, sizeof(int), f);
+    if(erro <= 0){
+        return Ler;
+    }
+
+    erro = fclose(f);
+    if(erro != 0){
+        return Fechar;
+    }
+
+    return Ok;
 }
 
 void Clear_buffer(){
