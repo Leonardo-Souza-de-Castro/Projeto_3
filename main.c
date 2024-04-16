@@ -11,6 +11,7 @@ int main(){
         printf("\nMenu Principal: \n");
         printf("1 - Criar Contato \n");
         printf("2 - Listar Contato \n");
+        printf("3 - Deletar Contato \n");
         printf("0 - Sair \n");
         
         printf("Entre com uma opcao: ");
@@ -25,6 +26,10 @@ int main(){
 
         case 2:
             Listar(contatos, pos);
+            break;
+
+        case 3:
+            Deletar(contatos, &pos);
             break;
         
         default:
