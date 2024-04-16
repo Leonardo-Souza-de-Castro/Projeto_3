@@ -8,8 +8,6 @@ Erro Criar(Contatos contatos[], int *pos){
     }
     Clear_buffer();
 
-    // char nome[70];
-
     do
     {
         printf("Entre com seu nome: ");
