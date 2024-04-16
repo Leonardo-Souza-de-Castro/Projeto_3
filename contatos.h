@@ -4,7 +4,7 @@ typedef struct{
     char Nome[70];
     char Sobrenome[50];
     char Email[70];
-    char Telefone[11];
+    char Telefone[12];
 } Contatos;
 
 typedef enum erros{Ok, Maximo, Sem_contatos, Nao_existe, Abrir, Fechar, Escrever, Ler} Erro;
