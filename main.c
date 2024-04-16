@@ -6,6 +6,8 @@ int main(){
     int pos = 0;
     Contatos contatos[TOTAL];
 
+    Erro e = Carregar(contatos, TOTAL, &pos);
+
     do
     {
         printf("\nMenu Principal: \n");
@@ -30,6 +32,11 @@ int main(){
 
         case 3:
             Deletar(contatos, &pos);
+            break;
+
+        case 0:
+            printf("Encerrando Programa!");
+            Salvar(contatos, TOTAL, pos);
             break;
         
         default:
