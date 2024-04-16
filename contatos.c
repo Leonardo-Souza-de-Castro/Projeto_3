@@ -34,6 +34,46 @@ Erro Criar(Contatos contatos[], int *pos){
 
 }
 
+Erro Deletar(Contatos contatos[], int *pos){
+    if (*pos == 0)
+    {
+        return Sem_contatos;
+    }
+
+    char num_deletar[11];
+
+
+    printf("Entre com o numero do contato (nao utilize () ou - ao digitar): ");
+    fgets(contatos[*pos].Telefone, 11, stdin);
+
+    contatos[*pos].Telefone[strcspn(contatos[*pos].Telefone, "\n")] = 0;
+    Clear_buffer();
+
+    int pos_deletar = 0;
+    int i = 0;
+
+    for (i; i < *pos; i++)
+    {
+        if (strcmp(num_deletar, contatos[i].Telefone) == 0)
+        {
+            pos_deletar = i-1;
+        }
+    }
+    
+
+    for (i = pos_deletar; i < *pos; i++)
+    {
+        strcpy(contatos[i].Nome, contatos[i+1].Nome);
+        strcpy(contatos[i].Sobrenome, contatos[i+1].Sobrenome);
+        strcpy(contatos[i].Email, contatos[i+1].Email);
+        strcpy(contatos[i].Telefone, contatos[i+1].Telefone);
+    }
+
+    *pos = *pos-1;
+
+    return Ok;
+}
+
 Erro Listar(Contatos contatos[], int pos){
     if (pos == 0)
     {
