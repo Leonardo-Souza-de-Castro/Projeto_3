@@ -31,6 +31,7 @@ int main(){
         printf("Entre com uma opcao: ");
 
         scanf("%d", &opcao);
+        Clear_buffer();        
 
         switch (opcao)
         {
