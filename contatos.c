@@ -76,15 +76,6 @@ Erro Deletar(Contatos contatos[], int *pos){
     printf("Qual posicao do contato a ser deletado? \n");
     scanf("%d", &pos_deletar);
 
-    // for (i; i < *pos; i++)
-    // {
-    //     if (strcmp(num_deletar, contatos[i].Telefone) == 0)
-    //     {
-    //         pos_deletar = i-1;
-    //     }
-    // }
-    
-
     for (i = pos_deletar-1; i < *pos; i++)
     {
         printf("%d", i);
