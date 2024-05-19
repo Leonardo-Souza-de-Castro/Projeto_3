@@ -27,7 +27,7 @@ Erro Criar(Contatos contatos[], int *pos)
     {
         printf("Entre com seu email: ");
         fgets(contatos[*pos].Email, 70, stdin);
-    } while (strlen(contatos[*pos].Email) == 1);
+    } while (!(strstr(contatos[*pos].Email, "@") != NULL && strstr(contatos[*pos].Email, ".") != NULL));
 
     int i = 0;
     int pos_cont_exis = 0;
@@ -49,7 +49,7 @@ Erro Criar(Contatos contatos[], int *pos)
         }
         
 
-    } while (strcmp(num_add, contatos[pos_cont_exis].Telefone) == 0);
+    } while (strcmp(num_add, contatos[pos_cont_exis].Telefone) != 0);
 
     contatos[*pos].Nome[strcspn(contatos[*pos].Nome, "\n")] = 0;
     contatos[*pos].Sobrenome[strcspn(contatos[*pos].Sobrenome, "\n")] = 0;
