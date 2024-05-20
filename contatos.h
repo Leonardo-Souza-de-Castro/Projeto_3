@@ -12,6 +12,7 @@ typedef enum erros{Ok, Maximo, Sem_contatos, Nao_existe, Abrir, Fechar, Escrever
 Erro Criar(Contatos contatos[], int *pos);
 Erro Deletar(Contatos contatos[], int *pos);
 Erro Listar(Contatos contatos[], int pos);
+Erro Editar(Contatos contatos[], int *pos);
 Erro Salvar(Contatos contatos[],int total, int pos);
 Erro Carregar(Contatos contatos[],int total, int *pos);
 void Clear_buffer();

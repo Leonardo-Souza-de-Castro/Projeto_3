@@ -26,6 +26,7 @@ int main(){
         printf("1 - Criar Contato \n");
         printf("2 - Listar Contato \n");
         printf("3 - Deletar Contato \n");
+        printf("4 - Editar Contato \n");
         printf("0 - Sair \n");
         
         printf("Entre com uma opcao: ");
@@ -65,6 +66,10 @@ int main(){
                 printf("Erro: nao existe este contato\n");
             }
             break;
+        case 4:
+            e = Editar(contatos, &pos);
+
+
 
         case 0:
             printf("Encerrando Programa!");

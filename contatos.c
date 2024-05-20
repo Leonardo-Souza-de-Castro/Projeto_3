@@ -5,6 +5,7 @@
 Erro Criar(Contatos contatos[], int *pos)
 {
     char num_add[13];
+    char Email[70];
 
     if (*pos >= TOTAL)
     {
@@ -21,13 +22,17 @@ Erro Criar(Contatos contatos[], int *pos)
     {
         printf("Entre com seu sobrenome: ");
         fgets(contatos[*pos].Sobrenome, 50, stdin);
+        
     } while (strlen(contatos[*pos].Sobrenome) == 1);
     do
 
     {
         printf("Entre com seu email: ");
         fgets(contatos[*pos].Email, 70, stdin);
-    } while (!(strstr(contatos[*pos].Email, "@") != NULL && strstr(contatos[*pos].Email, ".") != NULL));
+        
+        strcpy(Email,strstr(contatos[*pos].Email, "@"));
+        
+    } while (!(strstr(contatos[*pos].Email, "@") != NULL && strstr(Email, ".") != NULL));
 
     int i = 0;
     int pos_cont_exis = 0;
@@ -49,7 +54,7 @@ Erro Criar(Contatos contatos[], int *pos)
         }
         
 
-    } while (strcmp(num_add, contatos[pos_cont_exis].Telefone) != 0);
+    } while (strcmp(num_add, contatos[pos_cont_exis].Telefone) == 0);
 
     contatos[*pos].Nome[strcspn(contatos[*pos].Nome, "\n")] = 0;
     contatos[*pos].Sobrenome[strcspn(contatos[*pos].Sobrenome, "\n")] = 0;
@@ -123,6 +128,107 @@ Erro Listar(Contatos contatos[], int pos)
         printf("\t Telefone: %s \n", contatos[i].Telefone);
     }
     return Ok;
+}
+
+Erro Editar(Contatos contatos[], int *pos){
+
+    if (*pos == 0)
+    {
+        return Sem_contatos;
+    }
+
+    int i = 0;
+    for (i; i < *pos; i++)
+    {
+        printf("Posicao: %d", i + 1);
+        printf("\t Nome do Contato: %s %s", contatos[i].Nome, contatos[i].Sobrenome);
+        printf("\t Email: %s", contatos[i].Email);
+        printf("\t Telefone: %s \n", contatos[i].Telefone);
+    }
+
+    int pos_contato = 0;
+    printf("Selecione a posicao do contato que deseja editar: \n");
+    scanf("%d", &pos_contato);
+
+    char num[13];
+    char Nome[70];
+    char Sobrenome[50];
+    char Email[70];
+    char Email_posArrouba[70];
+
+    printf("Entre com o novo nome (ou aperte enter para manter o antigo): ");
+    fgets(Nome, 70, stdin);
+
+    Clear_buffer();
+
+    printf("Entre com o novo sobrenome (ou aperte enter para manter o antigo): ");
+    fgets(Sobrenome, 50, stdin);
+
+    do
+    {
+        printf("Entre com o novo email: ");
+        fgets(Email, 70, stdin);
+
+        if(strlen(Email) <= 1){
+            strcpy(Email, contatos[pos_contato-1].Email);
+        }
+
+        strcpy(Email_posArrouba,strstr(Email, "@"));
+        
+    } while (!(strstr(Email, "@") != NULL && strstr(Email_posArrouba, ".") != NULL));
+
+    i = 0;
+    int pos_cont_exis = 0;
+    int status = 0;
+    
+    do
+    {
+        printf("Entre com o novo telefone: ");
+        fgets(num, 12, stdin);
+        Clear_buffer();
+
+        if(strlen(num) <= 1){
+            status = 1;
+            strcpy(num, contatos[pos_contato-1].Telefone);
+        }
+        else{
+            i = 0;
+            pos_cont_exis = 0;
+            for (i; i < *pos; i++)
+            {
+                if (strcmp(contatos[i].Telefone, num) == 0)
+                {
+                    printf("Erro: Este numero ja existe na lista de contatos\n");
+                    pos_cont_exis = i;
+                }
+            }
+            status = 1;
+        }
+
+    } while (status != 1);
+
+    Nome[strcspn(Nome, "\n")] = 0;
+    Sobrenome[strcspn(Sobrenome, "\n")] = 0;
+    Email[strcspn(Email, "\n")] = 0;
+    // num[strcspn(num, "\n")] = 0;
+
+    if (strlen(Nome) > 1)
+    {
+        strcpy(contatos[pos_contato-1].Nome, Nome);
+    }
+    else if (strlen(Sobrenome) > 1)
+    {
+        strcpy(contatos[pos_contato-1].Sobrenome, Sobrenome);
+    }
+    else if (strlen(Email) > 1)
+    {
+        strcpy(contatos[pos_contato-1].Email, Email);
+    }
+    
+    if (strlen(num) > 1)
+    {
+        strcpy(contatos[pos_contato-1].Telefone, num);
+    }
 }
 
 Erro Salvar(Contatos contatos[], int total, int pos)
