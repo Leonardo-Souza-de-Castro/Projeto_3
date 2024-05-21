@@ -4,9 +4,18 @@
 int main(){
     int opcao;
     int pos;
+    int agenda;
     Contatos contatos[TOTAL];
+    Contatos contatos_Trabalho[TOTAL];
 
-    Erro e = Carregar(contatos, TOTAL, &pos);
+
+    printf("\nQual agenda gostaria de mexer: \n");
+    printf("1 - Pessoal \n");
+    printf("2 - Trabalho \n");
+
+    scanf("%d", &agenda);
+    
+    Erro e = Carregar(contatos, TOTAL, &pos, agenda);
 
     if (e == Abrir)
     {
@@ -27,6 +36,7 @@ int main(){
         printf("2 - Listar Contato \n");
         printf("3 - Deletar Contato \n");
         printf("4 - Editar Contato \n");
+        printf("5 - Trocar Agenda \n");
         printf("0 - Sair \n");
         
         printf("Entre com uma opcao: ");
@@ -69,11 +79,51 @@ int main(){
         case 4:
             e = Editar(contatos, &pos);
 
+            if (e == Sem_contatos)
+                {
+                    printf("Erro: nao existem contatos para deletar\n");
+                }
+            break;
+        case 5:
+            if(agenda == 1){
+                agenda = 0;
+                e = Carregar(contatos, TOTAL, &pos, agenda);
 
+                if (e == Abrir)
+                    {
+                        printf("Erro: nao foi possivel abrir o arquivo\n");
+                    }
+                    else if (e == Ler)
+                    {
+                        printf("Erro: nao foi possivel ler os contatos no arquivo\n");
+                    }
+                    else if(e == Fechar){
+                        printf("Erro: nao foi possivel fechar o arquivo\n");
+                    }
+            }
+            else{
+                agenda = 1;
+                e = Carregar(contatos, TOTAL, &pos, agenda);
+
+                if (e == Abrir)
+                    {
+                        printf("Erro: nao foi possivel abrir o arquivo\n");
+                    }
+                    else if (e == Ler)
+                    {
+                        printf("Erro: nao foi possivel ler os contatos no arquivo\n");
+                    }
+                    else if(e == Fechar){
+                        printf("Erro: nao foi possivel fechar o arquivo\n");
+                    }
+            }
+            printf("%d", agenda);
+            break;
+            
 
         case 0:
             printf("Encerrando Programa!");
-            e = Salvar(contatos, TOTAL, pos);
+            
 
             if (e == Abrir)
             {
@@ -94,6 +144,8 @@ int main(){
             printf("Opcao invalida! \n");
             break;
         }
+        
+    e = Salvar(contatos, TOTAL, pos, agenda);
 
     } while (opcao != 0);
 

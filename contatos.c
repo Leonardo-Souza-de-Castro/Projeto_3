@@ -229,68 +229,136 @@ Erro Editar(Contatos contatos[], int *pos){
     {
         strcpy(contatos[pos_contato-1].Telefone, num);
     }
-}
-
-Erro Salvar(Contatos contatos[], int total, int pos)
-{
-    FILE *f = fopen("contatos", "wb");
-
-    if (f == NULL)
-    {
-        return Abrir;
-    }
-
-    int erro = fwrite(contatos, total, sizeof(Contatos), f);
-
-    if (erro <= 0)
-    {
-        return Escrever;
-    }
-
-    erro = fwrite(&pos, 1, sizeof(int), f);
-
-    if (erro <= 0)
-    {
-        return Escrever;
-    }
-
-    erro = fclose(f);
-    if (erro != 0)
-    {
-        return Fechar;
-    }
 
     return Ok;
 }
 
-Erro Carregar(Contatos contatos[], int total, int *pos)
+Erro Salvar(Contatos contatos[], int total, int pos, int agenda)
 {
-    FILE *f = fopen("contatos", "rb");
+    FILE f;
+    if(agenda == 1){
+        FILE *f = fopen("contatos", "wb");
+        
+        if (f == NULL)
+            {
+                return Abrir;
+            }
 
-    if (f == NULL)
-    {
-        return Abrir;
+        int erro = fwrite(contatos, total, sizeof(Contatos), f);
+
+        if (erro <= 0)
+        {
+            return Escrever;
+        }
+
+        erro = fwrite(&pos, 1, sizeof(int), f);
+
+        if (erro <= 0)
+        {
+            return Escrever;
+        }
+
+        erro = fclose(f);
+        if (erro != 0)
+        {
+            return Fechar;
+        }
+
+        return Ok;
+    }
+    else{
+        FILE *f = fopen("contatos_trabalho", "wb");
+
+        if (f == NULL)
+            {
+                return Abrir;
+            }
+        
+        int erro = fwrite(contatos, total, sizeof(Contatos), f);
+
+        if (erro <= 0)
+        {
+            return Escrever;
+        }
+
+        erro = fwrite(&pos, 1, sizeof(int), f);
+
+        if (erro <= 0)
+        {
+            return Escrever;
+        }
+
+        erro = fclose(f);
+        if (erro != 0)
+        {
+            return Fechar;
+        }
+
+        return Ok;
     }
 
-    int erro = fread(contatos, total, sizeof(Contatos), f);
-    if (erro <= 0)
-    {
-        return Ler;
+    
+}
+
+Erro Carregar(Contatos contatos[], int total, int *pos, int agenda)
+{
+
+    if(agenda == 1){
+        FILE *f = fopen("contatos", "rb");
+
+        if (f == NULL)
+            {
+                return Abrir;
+            }
+
+            int erro = fread(contatos, total, sizeof(Contatos), f);
+            if (erro <= 0)
+            {
+                return Ler;
+            }
+
+            erro = fread(pos, 1, sizeof(int), f);
+            if (erro <= 0)
+            {
+                return Ler;
+            }
+
+            erro = fclose(f);
+            if (erro != 0)
+            {
+                return Fechar;
+            }
+
+            return Ok;
+    }else{
+        FILE *f = fopen("contatos_trabalho", "rb");
+
+        if (f == NULL)
+            {
+                return Abrir;
+            }
+
+            int erro = fread(contatos, total, sizeof(Contatos), f);
+            if (erro <= 0)
+            {
+                return Ler;
+            }
+
+            erro = fread(pos, 1, sizeof(int), f);
+            if (erro <= 0)
+            {
+                return Ler;
+            }
+
+            erro = fclose(f);
+            if (erro != 0)
+            {
+                return Fechar;
+            }
+
+            return Ok;
     }
 
-    erro = fread(pos, 1, sizeof(int), f);
-    if (erro <= 0)
-    {
-        return Ler;
-    }
-
-    erro = fclose(f);
-    if (erro != 0)
-    {
-        return Fechar;
-    }
-
-    return Ok;
 }
 
 void Clear_buffer()

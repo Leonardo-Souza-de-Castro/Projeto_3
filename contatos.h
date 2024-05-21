@@ -13,6 +13,6 @@ Erro Criar(Contatos contatos[], int *pos);
 Erro Deletar(Contatos contatos[], int *pos);
 Erro Listar(Contatos contatos[], int pos);
 Erro Editar(Contatos contatos[], int *pos);
-Erro Salvar(Contatos contatos[],int total, int pos);
-Erro Carregar(Contatos contatos[],int total, int *pos);
+Erro Salvar(Contatos contatos[],int total, int pos, int agenda);
+Erro Carregar(Contatos contatos[],int total, int *pos, int agenda);
 void Clear_buffer();
